@@ -1,23 +1,39 @@
-pipeline{
-    agent{
+pipeline {
+    agent {
         node{
             label 'agent1'
         }
     }
-    tools {
+    tools{
         nodejs 'npm'
     }
-    stages{
-        stage('Build'){
-            steps{
-                sh 'docker build -t menghout43/react-restaurant .'
-                sh 'docker push menghout43/react-restaurant'
+    environment{
+        MY_IMAGE='react-image'
+    }
+    stages {
+        stage('Build') {
+            steps {
+                sh 'docker build -t ${MY_IMAGE} .'
             }
         }
-        stage('Deploy'){
-            steps{
-                sh 'docker compose build'
-                sh 'docker compose up -d'
+        stage('Test') {
+            steps {
+                echo "Testing .... dg mix teh"
+            }
+        }
+        stage('Deploy') {
+            steps {
+                script{
+                def existImageID= sh(script: 'docker ps -aq -f name="${MY_IMAGE}"',returnStdout:true)
+                    echo "ExistImageID:${existImageID}"
+                    if(existImageID){
+                        echo '${existImageID} is removing ...'
+                        sh 'docker rm -f ${MY_IMAGE}'
+                    }else{
+                        echo 'No existing container'
+                    }
+                }
+                sh 'docker run -d -p 3000:80 --name ${MY_IMAGE} ${MY_IMAGE}'
             }
         }
     }
