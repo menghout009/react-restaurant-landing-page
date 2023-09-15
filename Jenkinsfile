@@ -29,7 +29,7 @@ pipeline {
                         echo 'No existing container'
                     }
                 }
-                sh 'docker run -d -p 3000:80 --name ${MY_IMAGE} ${MY_IMAGE}'
+                sh 'docker run -d -p 3000:3000 --name ${MY_IMAGE} ${MY_IMAGE}'
             }
         }
     }
