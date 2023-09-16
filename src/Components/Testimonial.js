@@ -16,8 +16,8 @@ const Testimonial = () => {
       <div className="testimonial-section-bottom">
         <img src={ProfilePic} alt="" />
         <p>
-          Lorem ipsum dolor sit amet consectetur. Non tincidunt magna non et
-          elit. Dolor turpis molestie dui magnis facilisis at fringilla quam.
+          I get way too much happiness from good food.We're all so busy we don't
+          make time to enjoy our lives, good company and good food.
         </p>
         <div className="testimonials-stars-container">
           <AiFillStar />
@@ -26,7 +26,7 @@ const Testimonial = () => {
           <AiFillStar />
           <AiFillStar />
         </div>
-        <h2>John Doe</h2>
+        <h2>Keng menghout</h2>
       </div>
     </div>
   );
