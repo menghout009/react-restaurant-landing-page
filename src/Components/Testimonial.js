@@ -26,7 +26,7 @@ const Testimonial = () => {
           <AiFillStar />
           <AiFillStar />
         </div>
-        <h2>Seavlang</h2>
+        <h2>Ginna Moon</h2>
       </div>
     </div>
   );
