@@ -14,7 +14,7 @@ const Home = () => {
         </div>
         <div className="home-text-section">
           <h1 className="primary-heading">
-            This is my testing jenkins after update & Fresh
+            This is auto-foodie delivery fast & fresh food
           </h1>
           <p className="primary-text">
             Healthy switcher chefs do all the prep work, like peeding, chopping
