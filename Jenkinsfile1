@@ -10,8 +10,8 @@ pipeline {
         stage('Preparation') {
             steps {
                 echo "Starting the pipeline for ${env.JOB_NAME}"
-                sh 'node --version' // Check Node.js version
-                sh 'npm --version'  // Check npm version
+                sh 'node --version' // Verify Node.js version
+                sh 'npm --version'  // Verify npm version
             }
         }
 
