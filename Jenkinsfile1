@@ -42,7 +42,7 @@ pipeline {
                         -Dsonar.projectKey=React-demo \
                         -Dsonar.projectName=ReactApp \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://34.87.163.238/:9000 \
+                        -Dsonar.host.url=http://34.87.163.238:9000 \
                         -Dsonar.login=sqp_bbcfe788bdcb0351d9fd0156b0564b0e1058a827
                     ''' // Run SonarQube analysis for JavaScript
                 }
