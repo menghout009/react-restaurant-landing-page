@@ -12,7 +12,7 @@ pipeline {
 
     environment {
         CURRENT_TIMESTAMP = sh(script: 'date +"%Y-%m-%d_%H-%M-%S"', returnStdout: true).trim()
-        LOG_FILE = "${env.WORKSPACE}/logs_${CURRENT_TIMESTAMP}.txt"
+        LOG_FILE = "${env.WORKSPACE}/pipeline_logs/logs_${CURRENT_TIMESTAMP}.txt"
     }
 
     stages {
@@ -77,9 +77,10 @@ pipeline {
                 sh """
                     mkdir -p ${env.WORKSPACE}/pipeline_logs
                     echo "Pipeline Execution Log - ${CURRENT_TIMESTAMP}" > ${LOG_FILE}
-                    cat ${env.WORKSPACE}/build.xml >> ${LOG_FILE}
+                    echo "---------------------------" >> ${LOG_FILE}
+                    cat ${env.WORKSPACE}/consoleText >> ${LOG_FILE} || echo "No consoleText found." >> ${LOG_FILE}
                 """
-                archiveArtifacts artifacts: "logs_${CURRENT_TIMESTAMP}.txt", allowEmptyArchive: true
+                archiveArtifacts artifacts: "pipeline_logs/logs_${CURRENT_TIMESTAMP}.txt", allowEmptyArchive: true
                 echo "Logs file archived: logs_${CURRENT_TIMESTAMP}.txt"
             }
             echo "Pipeline execution finished at ${CURRENT_TIMESTAMP}."
@@ -91,7 +92,6 @@ pipeline {
         failure {
             echo "❌ Pipeline failed. Check logs for details."
             echo "Result Link: http://34.87.163.238:9000/dashboard?id=React-demo&status=failure"
-            echo "Logs file location : ${env.WORKSPACE}"
         }
     }
 }
