@@ -10,10 +10,15 @@ pipeline {
         nodejs 'NodeJS' // Replace 'NodeJS' with the name of your NodeJS tool in Jenkins
     }
 
+    environment {
+        CURRENT_TIMESTAMP = sh(script: 'date +"%Y-%m-%d_%H-%M-%S"', returnStdout: true).trim()
+        LOG_FILE = "${env.WORKSPACE}/logs_${CURRENT_TIMESTAMP}.txt"
+    }
+
     stages {
         stage('Preparation') {
             steps {
-                echo "Starting the pipeline for ${env.JOB_NAME}"
+                echo "Starting the pipeline for ${env.JOB_NAME} at ${CURRENT_TIMESTAMP}"
                 sh 'node --version' // Verify Node.js version
                 sh 'npm --version'  // Verify npm version
             }
@@ -63,10 +68,22 @@ pipeline {
                 }
             }
         }
-
     }
 
-post {
+    post {
+        always {
+            script {
+                echo "Generating logs file with timestamp..."
+                sh """
+                    mkdir -p ${env.WORKSPACE}/pipeline_logs
+                    echo "Pipeline Execution Log - ${CURRENT_TIMESTAMP}" > ${LOG_FILE}
+                    cat ${env.WORKSPACE}/build.xml >> ${LOG_FILE}
+                """
+                archiveArtifacts artifacts: "logs_${CURRENT_TIMESTAMP}.txt", allowEmptyArchive: true
+                echo "Logs file archived: logs_${CURRENT_TIMESTAMP}.txt"
+            }
+            echo "Pipeline execution finished at ${CURRENT_TIMESTAMP}."
+        }
         success {
             echo "✅ Pipeline completed successfully for ${env.JOB_NAME}."
             echo "Result Link: http://34.87.163.238:9000/dashboard?id=React-demo&status=success"
@@ -74,9 +91,6 @@ post {
         failure {
             echo "❌ Pipeline failed. Check logs for details."
             echo "Result Link: http://34.87.163.238:9000/dashboard?id=React-demo&status=failure"
-        }
-        always {
-            echo "Pipeline execution finished."
         }
     }
 }
