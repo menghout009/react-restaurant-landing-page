@@ -91,6 +91,7 @@ pipeline {
         failure {
             echo "❌ Pipeline failed. Check logs for details."
             echo "Result Link: http://34.87.163.238:9000/dashboard?id=React-demo&status=failure"
+            echo "Logs file location : ${env.WORKSPACE}"
         }
     }
 }
