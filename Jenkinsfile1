@@ -6,6 +6,10 @@ pipeline {
         timestamps() // Add timestamps to logs
     }
 
+    tools {
+        nodejs 'NodeJS-20' // Replace 'NodeJS-20' with the name of your NodeJS tool in Jenkins
+    }
+
     stages {
         stage('Preparation') {
             steps {
@@ -35,11 +39,11 @@ pipeline {
                 withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
                     sh '''
                         npx sonar-scanner \
-                        -Dsonar.projectKey=my-react-project \
+                        -Dsonar.projectKey=React-demo \
                         -Dsonar.projectName=ReactApp \
-                        -Dsonar.sources=src \
-                        -Dsonar.host.url=http://<sonarqube-server>:9000 \
-                        -Dsonar.login=<your-sonarqube-token>
+                        -Dsonar.sources=. \
+                        -Dsonar.host.url=http://34.87.163.238/:9000 \
+                        -Dsonar.login=sqp_bbcfe788bdcb0351d9fd0156b0564b0e1058a827
                     ''' // Run SonarQube analysis for JavaScript
                 }
             }
