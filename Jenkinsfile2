@@ -64,47 +64,16 @@ pipeline {
             }
         }
 
-        stage('Build Docker Image') {
-            steps {
-                echo "Building the Docker image for the React app..."
-                writeFile file: 'Dockerfile', text: '''
-                # Use an official Node.js runtime as the base image
-                FROM node:14
-
-                # Set the working directory inside the container
-                WORKDIR /app
-
-                # Copy package.json and package-lock.json to the working directory
-                COPY package*.json ./
-
-                # Install the project dependencies
-                RUN npm install
-
-                # Copy the rest of the application files to the container
-                COPY . .
-
-                # Build the React app for production
-                RUN npm run build
-
-                # Expose the port that the app will run on
-                EXPOSE 3000
-
-                # Start the React app
-                CMD ["npm", "start"]
-                '''
-                sh '''
-                    docker build -t react-app:latest .
-                '''
-            }
-        }
     }
 
-    post {
+post {
         success {
             echo "✅ Pipeline completed successfully for ${env.JOB_NAME}."
+            echo "Result Link: http://34.87.163.238:9000/dashboard?id=React-demo&status=success"
         }
         failure {
             echo "❌ Pipeline failed. Check logs for details."
+            echo "Result Link: http://34.87.163.238:9000/dashboard?id=React-demo&status=failure"
         }
         always {
             echo "Pipeline execution finished."
