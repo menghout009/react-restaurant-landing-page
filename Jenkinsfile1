@@ -7,7 +7,7 @@ pipeline {
     }
 
     tools {
-        nodejs 'NodeJS-20' // Replace 'NodeJS-20' with the name of your NodeJS tool in Jenkins
+        nodejs 'NodeJS-23.4.0' // Replace 'NodeJS-20' with the name of your NodeJS tool in Jenkins
     }
 
     stages {
