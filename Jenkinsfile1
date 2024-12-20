@@ -58,7 +58,11 @@ pipeline {
                         if (qualityGate.status != 'OK') {
                             error "Pipeline failed due to quality gate failure: ${qualityGate.status}"
                         }
-                        echo "SonarQube analysis results available at: ${env.BUILD_URL}/sonarqube"
+                        // Extract project name from the Jenkins environment
+                    def projectName = env.JOB_NAME // Assuming project name matches SonarQube key
+                    def sonarHostUrl = "http://34.87.163.238:9000" // SonarQube server URL
+                    def sonarDashboardUrl = "${sonarHostUrl}/dashboard?id=${projectName}&codeScope=overall"
+                    echo "SonarQube analysis results available at: ${sonarDashboardUrl}"
                     }
                 }
             }
