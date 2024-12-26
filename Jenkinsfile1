@@ -67,10 +67,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Pipeline completed successfully for >>> ${env.BUILD_URL}/sonarqube"
+            echo "✅ Pipeline completed successfully for detail. ${env.BUILD_URL}"
         }
         failure {
-            echo "❌ Pipeline failed. Check logs for details. >>> ${env.BUILD_URL}/sonarqube"
+            echo "❌ Pipeline failed. Check logs for details."
         }
         always {
             echo "Pipeline execution finished."
