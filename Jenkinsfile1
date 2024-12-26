@@ -73,7 +73,7 @@ pipeline {
             echo "✅ Pipeline completed successfully for detail. ${env.BUILD_URL}"
         }
         failure {
-            echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL} + ${PROJECT_KEY}"
+            echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
             
         }
         always {
