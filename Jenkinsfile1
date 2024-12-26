@@ -70,7 +70,7 @@ pipeline {
             echo "✅ Pipeline completed successfully for detail. ${env.BUILD_URL}"
         }
         failure {
-            echo "❌ Pipeline failed. Check logs for details. >> ${env.JOB_NAME}"
+            echo "❌ Pipeline failed. Check logs for details. >> http://34.87.163.238:9000/dashboard?id=${env.JOB_NAME}"
         }
         always {
             echo "Pipeline execution finished."
