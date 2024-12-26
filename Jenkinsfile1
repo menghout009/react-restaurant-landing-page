@@ -70,7 +70,7 @@ pipeline {
             echo "✅ Pipeline completed successfully for detail. ${env.BUILD_URL}"
         }
         failure {
-            echo "❌ Pipeline failed. Check logs for details."
+            echo "❌ Pipeline failed. Check logs for details. >> ${env.JOB_NAME}"
         }
         always {
             echo "Pipeline execution finished."
