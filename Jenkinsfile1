@@ -43,10 +43,9 @@ pipeline {
                     sh '''
                         npx sonar-scanner \
                         -Dsonar.projectKey=React-demo \
-                        -Dsonar.projectName=ReactApp \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://34.87.163.238:9000 \
-                        -Dsonar.login=sqp_bbcfe788bdcb0351d9fd0156b0564b0e1058a827
+                        -Dsonar.token=sqp_3e7ef95952daea996db5a6343ed71f4b7a6f7e2d
                     ''' // Run SonarQube analysis for JavaScript
                 }
             }
