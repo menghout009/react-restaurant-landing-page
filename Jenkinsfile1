@@ -60,7 +60,7 @@ pipeline {
                         if (qualityGate.status != 'OK') {
                             error "Pipeline failed due to quality gate failure: ${qualityGate.status}"
                         }
-                    echo "SonarQube analysis results available at: >>> ${env.BUILD_URL}/sonarqube"
+                    echo "SonarQube analysis results available at: >>> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
                     }
                 }
             }
@@ -69,7 +69,7 @@ pipeline {
 
     post {
         success {
-            echo "✅ Pipeline completed successfully for detail. ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
+            echo "✅ Pipeline completed successfully for detail. ${evn.Build}"
         }
         failure {
             echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
