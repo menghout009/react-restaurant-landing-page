@@ -69,7 +69,8 @@ pipeline {
 
     post {
         success {
-            echo "✅ Pipeline completed successfully for detail. ${evn.Build}"
+            echo "✅ Pipeline completed successfully."
+            echo "🔗 For detail >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
         }
         failure {
             echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
