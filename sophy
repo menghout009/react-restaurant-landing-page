@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        SONARQUBE_URL = "http://34.87.163.238:9000" // your host
+        SONARQUBE_URL = "http://178.128.17.184:9000" // your host
         PROJECT_KEY = "React-demo" // your sonarqube project name
     }
     options {
@@ -42,10 +42,10 @@ pipeline {
                 withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
                     sh '''
                         npx sonar-scanner \
-                        -Dsonar.projectKey=React-demo \
+                        -Dsonar.projectKey=testng \
                         -Dsonar.sources=. \
-                        -Dsonar.host.url=http://34.87.163.238:9000 \
-                        -Dsonar.token=sqp_3e7ef95952daea996db5a6343ed71f4b7a6f7e2d
+                        -Dsonar.host.url=http://178.128.17.184:9000 \
+                        -Dsonar.token=sqp_297cd542c66ca95524be9c55e22071a3c1354a5d
                     ''' // Run SonarQube analysis for JavaScript
                 }
             }
