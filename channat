@@ -43,9 +43,10 @@ pipeline {
             withCredentials([string(credentialsId: 'sonar-token-id', variable: 'SONAR_TOKEN')]) {
                 sh '''
                     npx sonar-scanner \
-                      -Dsonar.sources=. \
-                      -Dsonar.host.url=http://34.87.145.53:9000 \
-                      -Dsonar.token=sqp_082462a3d3863e7e9f23e289fc836574a1a87cc2
+                    -Dsonar.projectKey=reachjs \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=http://34.87.145.53:9000 \
+                    -Dsonar.token=sqp_082462a3d3863e7e9f23e289fc836574a1a87cc2
                 ''' // Run SonarQube analysis for JavaScript
             }
         }
