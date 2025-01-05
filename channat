@@ -1,1 +1,84 @@
+pipeline {
+    agent any
+    environment {
+        SONARQUBE_URL = "http://34.87.145.53/:9000" // your host
+        PROJECT_KEY = "reachjs" // your sonarqube project name
+    }
+    options {
+        buildDiscarder(logRotator(numToKeepStr: '5')) // Keep only the last 5 builds
+        timestamps() // Add timestamps to logs
+    }
 
+    tools {
+        nodejs 'NodeJS' // Replace 'NodeJS-20' with the name of your NodeJS tool in Jenkins
+    }
+
+    stages {
+        stage('Preparation') {
+            steps {
+                echo "Starting the pipeline for ${env.JOB_NAME}"
+                sh 'node --version' // Verify Node.js version
+                sh 'npm --version'  // Verify npm version
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                echo "Installing project dependencies..."
+                sh 'npm install' // Install dependencies
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo "Building the React.js project..."
+                sh 'npm run build' // Build the project
+            }
+        }
+
+        stage('SonarQube Scan') {
+    steps {
+        echo "Starting SonarQube scan..."
+        withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
+            withCredentials([string(credentialsId: 'sonar-token-id', variable: 'SONAR_TOKEN')]) {
+                sh '''
+                    npx sonar-scanner \
+                      -Dsonar.sources=. \
+                      -Dsonar.host.url=http://34.87.145.53:9000 \
+                      -Dsonar.token=sqp_082462a3d3863e7e9f23e289fc836574a1a87cc2
+                ''' // Run SonarQube analysis for JavaScript
+            }
+        }
+    }
+}
+
+        stage('Quality Gate') {
+            steps {
+                script {
+                    echo "Waiting for SonarQube quality gate results..."
+                    timeout(time: 30, unit: 'MINUTES') { // Set a timeout of 30 minutes
+                        def qualityGate = waitForQualityGate() // Wait for the quality gate results
+                        if (qualityGate.status != 'OK') {
+                            error "Pipeline failed due to quality gate failure: ${qualityGate.status}"
+                        }
+                    echo "SonarQube analysis results available at: >>> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
+                    }
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Pipeline completed successfully."
+            echo "🔗 For detail >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
+        }
+        failure {
+            echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
+            
+        }
+        always {
+            echo "Pipeline execution finished."
+        }
+    }
+}
