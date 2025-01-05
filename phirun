@@ -37,19 +37,20 @@ pipeline {
         }
 
         stage('SonarQube Scan') {
-            steps {
-                echo "Starting SonarQube scan..."
-                withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
-                    sh '''
-                        npx sonar-scanner \
-                        -Dsonar.projectKey=demo12 \
-                        -Dsonar.sources=. \
-                        -Dsonar.host.url=http://167.99.77.178:9000 \
-                        -Dsonar.token=sqp_e4283b02fc8fea620a2167e15c4ead3d8086c252
-                    ''' // Run SonarQube analysis for JavaScript
-                }
-            }
+    steps {
+        echo "Starting SonarQube scan..."
+        withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
+            sh '''
+                npx sonar-scanner \
+                -Dsonar.projectKey=demo12 \
+                -Dsonar.sources=. \
+                -Dsonar.host.url=http://167.99.77.178:9000 \
+                -Dsonar.token=sqp_e4283b02fc8fea620a2167e15c4ead3d8086c252
+            ''' // Run SonarQube analysis for JavaScript
         }
+    }
+}
+
 
         stage('Quality Gate') {
             steps {
