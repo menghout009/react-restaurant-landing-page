@@ -45,7 +45,7 @@ pipeline {
                         -Dsonar.projectKey=testng \
                         -Dsonar.sources=. \
                         -Dsonar.host.url=http://178.128.17.184:9000 \
-                        -Dsonar.token=sqp_297cd542c66ca95524be9c55e22071a3c1354a5d
+                        -Dsonar.token=sqp_605ffec0975c35863ee19f4392550fc424f829e6
                     ''' // Run SonarQube analysis for JavaScript
                 }
             }
