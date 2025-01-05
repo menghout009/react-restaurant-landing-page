@@ -2,7 +2,7 @@ pipeline {
     agent any
     environment {
         SONARQUBE_URL = "http://178.128.17.184:9000" // your host
-        PROJECT_KEY = "React-demo" // your sonarqube project name
+        PROJECT_KEY = "testing" // your sonarqube project name
     }
     options {
         buildDiscarder(logRotator(numToKeepStr: '5')) // Keep only the last 5 builds
