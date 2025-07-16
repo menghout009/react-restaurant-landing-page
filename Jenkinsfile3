@@ -45,7 +45,7 @@ pipeline {
                   -Dsonar.projectKey=React-demo \
                   -Dsonar.sources=. \
                   -Dsonar.host.url=http://34.87.163.238:9000 \
-                  -Dsonar.token=sqp_a386b0c0dff145a0cef7b80fb83251637cfc2a87
+                  -Dsonar.token=sqp_3ebdba757bc7d51101c0a2ac1b8f6b893c8ab0ae
             '''
         }
     }
