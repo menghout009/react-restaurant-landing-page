@@ -67,16 +67,16 @@ pipeline {
         }
     }
 
-    //post {
-        //success {
-           // echo "✅ Pipeline completed successfully for detail. ${env.BUILD_URL}"
-       // }
-        //failure {
-            //echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
+    post {
+        success {
+            echo "✅ Pipeline completed successfully for detail. ${env.BUILD_URL}"
+        }
+        failure {
+            echo "❌ Pipeline failed. Check logs for details. >> ${SONARQUBE_URL}/dashboard?id=${PROJECT_KEY}"
             
-        //}
-        //always {
-           // echo "Pipeline execution finished."
-        //}
-    //}
+        }
+        always {
+            echo "Pipeline execution finished."
+        }
+    }
 }
