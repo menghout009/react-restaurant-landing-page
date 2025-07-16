@@ -41,11 +41,11 @@ pipeline {
         echo "Starting SonarQube scan..."
         withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
             sh '''
-                npx sonar-scanner \
-                  -Dsonar.projectKey=React-demo \
+                sonar-scanner \
+                  -Dsonar.projectKey=React \
                   -Dsonar.sources=. \
-                  -Dsonar.host.url=http://34.87.163.238:9000 \
-                  -Dsonar.token=sqp_3ebdba757bc7d51101c0a2ac1b8f6b893c8ab0ae
+                  -Dsonar.host.url=http://34.143.241.122:9000 \
+                  -Dsonar.token=sqp_62e18977d27eca6f68067338281af6b2d3bd5bfb
             '''
         }
     }
