@@ -45,7 +45,7 @@ pipeline {
                   -Dsonar.projectKey=Web-Restaurant \
                   -Dsonar.sources=. \
                   -Dsonar.host.url=http://34.143.241.122:9000 \
-                  -Dsonar.token=sqp_0956d6ee1c4ef7cc645b1ef308082bf86ed24e02
+                  -Dsonar.token=sqa_20dc7beaf3a6f9c114ac5ea55a4f10a219c0cc98
             '''
         }
     }
