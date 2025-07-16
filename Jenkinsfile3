@@ -42,10 +42,10 @@ pipeline {
         withSonarQubeEnv('SonarQube') { // Use the configured SonarQube environment 'SonarQube'
             sh '''
                npx sonar-scanner \
-                  -Dsonar.projectKey=React \
+                  -Dsonar.projectKey=Web-Restaurant \
                   -Dsonar.sources=. \
                   -Dsonar.host.url=http://34.143.241.122:9000 \
-                  -Dsonar.token=sqp_62e18977d27eca6f68067338281af6b2d3bd5bfb
+                  -Dsonar.token=sqp_0956d6ee1c4ef7cc645b1ef308082bf86ed24e02
             '''
         }
     }
